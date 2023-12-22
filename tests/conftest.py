@@ -14,6 +14,7 @@ from app.main import create_app
 
 setting = get_settings()
 setting.TESTING = True
+setting.CREATE_ADMIN = True
 setting.DB_URL = setting.DB_TEST_URL
 
 
