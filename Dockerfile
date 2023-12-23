@@ -1,7 +1,5 @@
 FROM python:3.11-alpine
 
-WORKDIR /code
-
 RUN apk update && apk add postgresql-dev tzdata && \
     cp /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime && \
       apk add --no-cache \
@@ -20,17 +18,19 @@ RUN apk update && apk add postgresql-dev tzdata && \
       tk-dev \
       tcl-dev \
       harfbuzz-dev \
+      harfbuzz-dev \
       fribidi-dev && \
     apk del --purge .build-dependencies
 
 ADD Pipfile Pipfile.lock ./
 
-RUN pip install pipenv
-
-RUN pipenv install --system --skip-lock
+RUN pip install pipenv  &&\
+    pipenv install --system --deploy --ignore-pipfile
 
 ADD . .
 
+RUN chmod +x ./entrypoint.sh
+
 EXPOSE 8000
 
-ENTRYPOINT ["python", "run.py"]
+ENTRYPOINT ["./entrypoint.sh"]
