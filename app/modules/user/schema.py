@@ -17,7 +17,7 @@ class GetUserSchema(CamelModel):
         orm_mode = True
 
 
-class PostUserSchema(CamelModel):
+class CreateUserSchema(CamelModel):
     name: str
     email: str
     password: str

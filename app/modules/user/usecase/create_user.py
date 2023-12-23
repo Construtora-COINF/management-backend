@@ -6,7 +6,7 @@ from app.modules.user.abstracts.base_user_usecase import BaseUserUseCase
 
 
 class CreateUserUseCase(BaseUserUseCase, BaseUseCaseValidAlreadyExists):
-    def __init__(self, payload: schema.PostUserSchema):
+    def __init__(self, payload: schema.CreateUserSchema):
         super().__init__(payload)
         self._payload = payload
 

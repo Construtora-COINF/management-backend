@@ -32,8 +32,8 @@ def test_user_schema_should_return_valid_instance_fields_when_valid_data_is_pass
 def test_user_post_schema_should_return_valid_instance_when_valid_data_is_passed(
     user_post_fake_dict,
 ):
-    user_schema = schema.PostUserSchema(**user_post_fake_dict)
+    user_schema = schema.CreateUserSchema(**user_post_fake_dict)
 
-    assert isinstance(user_schema, schema.PostUserSchema)
+    assert isinstance(user_schema, schema.CreateUserSchema)
     assert isinstance(user_schema, CamelModel)
     assert isinstance(user_schema, BaseModel)

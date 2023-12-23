@@ -31,7 +31,7 @@ async def get_users():
     response_model=schema.GetUserSchema,
     dependencies=[Depends(JWTBearer())],
 )
-async def post_user(payload: schema.PostUserSchema):
+async def post_user(payload: schema.CreateUserSchema):
     return await usecase.CreateUserUseCase(payload).execute()
 
 

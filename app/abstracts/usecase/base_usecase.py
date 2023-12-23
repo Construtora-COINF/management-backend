@@ -1,9 +1,10 @@
 from abc import ABCMeta
 
-from fastapi import HTTPException, status
+from fastapi import HTTPException, Request, status
 
 from app.abstracts.usecase.base_utils_usecase import BaseUtilsUseCase
 from app.abstracts.usecase.enum import ErrorsUseCaseEnum
+from app.config.static_files import get_templates
 from app.interfaces.usecase_interface import InterfaceUseCase
 
 
@@ -45,3 +46,14 @@ class BaseFilterModelUseCase(InterfaceUseCase, BaseUtilsUseCase, metaclass=ABCMe
                 detail=self._errors.NOT_FOUND.format(model=self._model_name),
             )
         return models
+
+
+class BaseHtmlRenderTemplate(metaclass=ABCMeta):
+    _request: Request
+    _templates = get_templates()
+    _template_name: str
+
+    async def _get_template_response(self, data: dict):
+        context = {"request": self._request}
+        context.update(data)
+        return self._templates.TemplateResponse(self._template_name, context=context)

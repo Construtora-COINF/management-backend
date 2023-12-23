@@ -1,10 +1,7 @@
 import httpx
 from fastapi import HTTPException, status
 
-from app.config.settings import get_settings
 from app.interfaces.request_interface import RequestInterface
-
-settings = get_settings()
 
 
 class RequestHttpx(RequestInterface):

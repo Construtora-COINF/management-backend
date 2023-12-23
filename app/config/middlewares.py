@@ -3,15 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config.settings import get_settings
 
-settings = get_settings()
-
 
 def init_middlewares(app: FastAPI):
     """
     This module initializer the middlewares from application
     :param app
     """
-
+    settings = get_settings()
     app.add_middleware(
         CORSMiddleware,
         allow_credentials=True,

@@ -28,6 +28,7 @@ class Setting(BaseSettings):
     MODELS: List = [
         "aerich.models",
         "app.modules.user.model",
+        "app.modules.notifications.model",
     ]
     # Adm user
     NAME_ADMIN: str = config("NAME_ADMIN")
