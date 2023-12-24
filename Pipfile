@@ -26,6 +26,9 @@ unicode = "*"
 pydantic = "==1.10.12"
 tortoise-orm = "==0.19.3"
 jinja2 = "*"
+boto3 = "*"
+botocore = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 autoflake = "*"

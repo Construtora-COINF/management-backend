@@ -2,6 +2,8 @@ import base64
 import hashlib
 import re
 
+from bs4 import BeautifulSoup
+
 
 def md5(value: str):
     hash_value = hashlib.md5(value.encode()).hexdigest()
@@ -35,3 +37,10 @@ def valid_format_email(email: str):
     if not re.match(regex, email):
         return False
     return True
+
+
+async def remove_html_text(text: str):
+    soup = BeautifulSoup(text, "html.parser")
+    body_text = soup.get_text()
+    cleaned_text = re.sub(r"\n{3,}", "\n\n", body_text)
+    return cleaned_text

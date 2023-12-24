@@ -4,8 +4,8 @@ from fastapi_camelcase import CamelModel
 from tortoise.contrib.pydantic import pydantic_model_creator
 
 from app.interfaces.usecase_interface import InterfaceUseCase
-from app.modules.user.model import User
 from app.modules.user import schema
+from app.modules.user.model import User
 from app.modules.user.repository import UserRepository
 
 

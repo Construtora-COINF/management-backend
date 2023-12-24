@@ -53,7 +53,7 @@ class BaseHtmlRenderTemplate(metaclass=ABCMeta):
     _templates = get_templates()
     _template_name: str
 
-    async def _get_template_response(self, data: dict):
+    async def _render_template_response(self, data: dict):
         context = {"request": self._request}
         context.update(data)
         return self._templates.TemplateResponse(self._template_name, context=context)

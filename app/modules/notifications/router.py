@@ -7,8 +7,8 @@ router = APIRouter()
 @router.post(
     "/email/first-contact/",
     status_code=status.HTTP_200_OK,
-    # response_model=schema.GetNotificationSchema,
-    description="This router is to login user",
+    response_model=schema.GetSimpleNotificationSchema,
+    description="This router is to send first contact email to Coinf.",
 )
 async def send_welcome_email(
     payload: schema.SendEmailFirstContactSchema, request: Request

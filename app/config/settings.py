@@ -4,7 +4,9 @@ from typing import List
 
 from decouple import config
 from pydantic import BaseSettings
+import locale
 
+locale.setlocale(locale.LC_TIME, "pt_BR.utf8")
 log = logging.getLogger("uvicorn")
 
 
@@ -35,6 +37,15 @@ class Setting(BaseSettings):
     EMAIL_ADMIN: str = config("EMAIL_ADMIN")
     PASSWORD_ADMIN: str = config("PASSWORD_ADMIN")
     CREATE_ADMIN: bool = config("CREATE_ADMIN", default=False, cast=bool)
+
+    # Amazon AWS
+    AWS_ACCESS_KEY_ID: str = config("AWS_ACCESS_KEY_ID", cast=str)
+    AWS_SECRET_ACCESS_KEY: str = config("AWS_SECRET_ACCESS_KEY", cast=str)
+    AWS_REGION: str = config("AWS_REGION", default="sa-east-1", cast=str)
+
+    # Coinf
+    EMAIL_NO_REPLY: str = config("NAME_ADMIN", default="no-reply@teste.com", cast=str)
+    EMAIL_CONTACT: str = config("NAME_ADMIN", default="contact@teste.com", cast=str)
 
 
 @lru_cache()
