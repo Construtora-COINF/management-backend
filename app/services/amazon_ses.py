@@ -27,36 +27,35 @@ class AmazonSimpleEmailService:
             aws_secret_access_key=self.__aws_secret_access_key,
         )
 
+    async def _set_body(self, body_html: bytes, body_text: str):
+        return {
+            "Html": {
+                "Charset": self._charset,
+                "Data": bytes(body_html).decode(self._charset),
+            },
+            "Text": {"Charset": self._charset, "Data": body_text},
+        }
+
+    async def _set_subject(self, subject):
+        return {"Charset": self._charset, "Data": subject}
+
+    async def _set_destinations(self, to_emails: list):
+        return {"ToAddresses": to_emails}
+
     async def send_email(
         self,
         from_email: str,
-        to_email: str,
+        to_emails: list,
         subject: str,
         body_html: bytes,
         body_text: str,
     ):
         try:
             response = self._client.send_email(
-                Destination={
-                    "ToAddresses": [
-                        to_email,
-                    ],
-                },
+                Destination=await self._set_destinations(to_emails),
                 Message={
-                    "Subject": {
-                        "Charset": self._charset,
-                        "Data": subject,
-                    },
-                    "Body": {
-                        "Html": {
-                            "Charset": self._charset,
-                            "Data": bytes(body_html).decode(self._charset),
-                        },
-                        "Text": {
-                            "Charset": self._charset,
-                            "Data": body_text,
-                        },
-                    },
+                    "Subject": await self._set_subject(subject),
+                    "Body": await self._set_body(body_html, body_text),
                 },
                 Source=from_email,
             )

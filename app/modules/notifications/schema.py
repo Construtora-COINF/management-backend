@@ -1,38 +1,45 @@
 from datetime import datetime
 from typing import Optional
 
-from fastapi_camelcase import CamelModel
+from app.abstracts.schema.base_schema import BaseSchema
+from app.modules.core.validators import (
+    ValidateEmailSchema,
+    ValidateIpAddressSchema,
+    ValidatePhoneNumberSchema,
+    ValidateEmptyValuesSchema,
+)
+from app.modules.notifications.enum import NotificationTypesEnum
 
 
-class GetNotificationSchema(CamelModel):
+class GetNotificationSchema(BaseSchema):
     id: int
     uuid: str
-    type: str
+    type: NotificationTypesEnum
     ip_address: str
     payload: dict
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
 
-    class Config:
-        orm_mode = True
 
-
-class GetSimpleNotificationSchema(CamelModel):
+class GetSimpleNotificationSchema(BaseSchema):
     uuid: str
-    type: str
+    type: NotificationTypesEnum
     created_at: Optional[datetime]
 
-    class Config:
-        orm_mode = True
 
-
-class CreateNotificationSchema(CamelModel):
-    type: str
+class CreateNotificationSchema(BaseSchema, ValidateIpAddressSchema):
+    type: NotificationTypesEnum
     ip_address: str
     payload: dict
 
 
-class SendEmailFirstContactSchema(CamelModel):
+class SendEmailFirstContactSchema(
+    BaseSchema,
+    ValidateEmailSchema,
+    ValidateIpAddressSchema,
+    ValidateEmptyValuesSchema,
+    ValidatePhoneNumberSchema,
+):
     ip_address: str
     from_email: str
     text: str

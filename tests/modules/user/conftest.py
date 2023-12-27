@@ -1,3 +1,4 @@
+from datetime import datetime
 from uuid import uuid4
 
 import pytest
@@ -16,6 +17,8 @@ def user_fake_dict():
         "is_active": True,
         "email": faker.email(),
         "password": faker.password(),
+        "created_at": datetime.now(),
+        "updated_at": datetime.now(),
     }
 
 

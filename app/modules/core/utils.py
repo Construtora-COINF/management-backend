@@ -32,9 +32,62 @@ def is_valid_ip_address(ip_address: str) -> bool:
     return regex.match(ip_address) is not None
 
 
+def valid_format_phone_number(numero):
+    numbers = re.sub(r"\D", "", numero)
+    if re.match(
+        r"^\+?\d{1,3}[-.\s]?\(?\d{1,3}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}$", numbers
+    ):
+        return True
+    return False
+
+
 def valid_format_email(email: str):
     regex = r"[^@]+@[^@]+\.[^@]+"
     if not re.match(regex, email):
+        return False
+    return True
+
+
+def valid_number_of_words_string(string, number_words):
+    str_split = string.split()
+    if len(str_split) < number_words:
+        return False
+    return True
+
+
+def valid_string_format_email(email: str):
+    regex = r"[^@]+@[^@]+\.[^@]+"
+    if not re.match(regex, email):
+        return False
+    return True
+
+
+def valid_string_any_less_characters(string: str, max_characters: int):
+    if len(string) < max_characters:
+        return False
+    return True
+
+
+def valid_string_with_number(password: str):
+    if not re.findall(r"\d", password):
+        return False
+    return True
+
+
+def valid_string_with_upper_case(password: str):
+    if not re.findall(r"[A-Z]", password):
+        return False
+    return True
+
+
+def valid_string_with_lower_case(password: str):
+    if not re.findall(r"[a-z]", password):
+        return False
+    return True
+
+
+def valid_string_with_special_character(password: str):
+    if not re.findall(r"[()[\]{}|\\`~!@#$%^&*_\-+=;:'\",<>./?]", password):
         return False
     return True
 

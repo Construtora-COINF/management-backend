@@ -1,10 +1,15 @@
 from datetime import datetime
 from typing import Optional
 
-from fastapi_camelcase import CamelModel
+from app.abstracts.schema.base_schema import BaseSchema
+from app.modules.core.validators import (
+    ValidateEmailSchema,
+    ValidatePasswordSchema,
+    ValidateEmptyValuesSchema,
+)
 
 
-class GetUserSchema(CamelModel):
+class GetUserSchema(BaseSchema):
     id: int
     uuid: str
     email: str
@@ -13,39 +18,27 @@ class GetUserSchema(CamelModel):
     created_at: Optional[datetime]
     updated_at: Optional[datetime]
 
-    class Config:
-        orm_mode = True
 
-
-class CreateUserSchema(CamelModel):
+class CreateUserSchema(
+    BaseSchema, ValidateEmptyValuesSchema, ValidateEmailSchema, ValidatePasswordSchema
+):
     name: str
     email: str
     password: str
 
 
-class UpdateUserSchema(CamelModel):
-    name: str
-    email: str
-    password: str
-    is_active: bool
-
-
-class LoginUserSchema(CamelModel):
+class LoginUserSchema(BaseSchema, ValidateEmailSchema):
     email: str
     password: str
 
 
-class JWTUserSchema(CamelModel):
+class JWTUserSchema(BaseSchema):
     uuid: str
     email: str
     access_token: str
 
 
-class SimpleMessageSchema(CamelModel):
-    message: str
-
-
-class FilterUserSchema(CamelModel):
+class FilterUserSchema(BaseSchema):
     id: Optional[int]
     uuid: Optional[str]
     email: Optional[str]

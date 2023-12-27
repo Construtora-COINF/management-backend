@@ -47,11 +47,11 @@ class SendEmailFirstContactUseCase(BaseNotificationUseCase, BaseHtmlRenderTempla
 
     async def _register_notification(self):
         notification_db = await self._repository.create(
-            dict(
+            schema.CreateNotificationSchema(
                 type=self._type,
                 ip_address=self._payload.ip_address,
                 payload=self._payload.dict(),
-            )
+            ).dict()
         )
         return notification_db
 
@@ -65,11 +65,11 @@ class SendEmailFirstContactUseCase(BaseNotificationUseCase, BaseHtmlRenderTempla
         template, template_text = await self._get_template(data)
         await self._amazon_ses.send_email(
             from_email=self._email_from,
-            to_email=self._email_to,
-            subject=NotificationMessagesEnum.value.format(
+            to_emails=[self._email_to],
+            subject=NotificationMessagesEnum.SUBJECT_EMAIL_FIRST_CONTACT.value.format(
                 from_email=self._payload.from_email
             ),
-            body_html=bytes(template.body).decode("UTF-8"),
+            body_html=template.body,
             body_text=template_text,
         )
 
