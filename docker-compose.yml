@@ -1,0 +1,24 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: coinf-management-db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - ./.docker-volumes/postgresql:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  service:
+    build: ./
+    environment:
+      - DB_URL=mysql://admin:123456qw@db:3306/catalog_db
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/code
+    depends_on:
+      - db
