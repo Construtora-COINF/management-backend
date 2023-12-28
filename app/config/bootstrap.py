@@ -1,5 +1,8 @@
 from fastapi import FastAPI
+from loguru import logger
+
 from app.config.settings import get_settings
+import locale
 
 
 def create_app() -> FastAPI:
@@ -12,3 +15,10 @@ def create_app() -> FastAPI:
         root_path=setting.ROOT_PATH,
     )
     return application
+
+
+def set_locale():
+    try:
+        locale.setlocale(locale.LC_TIME, "pt_BR.utf8")
+    except locale.Error as e:
+        logger.error(e)

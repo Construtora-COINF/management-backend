@@ -4,9 +4,7 @@ from typing import List
 
 from decouple import config
 from pydantic import BaseSettings
-import locale
 
-locale.setlocale(locale.LC_TIME, "pt_BR.utf8")
 log = logging.getLogger("uvicorn")
 
 

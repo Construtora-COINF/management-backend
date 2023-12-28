@@ -1,4 +1,4 @@
-from app.config.bootstrap import create_app
+from app.config.bootstrap import create_app, set_locale
 from app.config.db import close_connection_database, connect_to_database
 from app.config.jwt import exception_jwt, init_jwt
 from app.config.middlewares import init_middlewares
@@ -8,6 +8,7 @@ from app.config.static_files import init_static_files
 app = create_app()
 init_middlewares(app)
 init_static_files(app)
+set_locale()
 
 
 @app.on_event("startup")
