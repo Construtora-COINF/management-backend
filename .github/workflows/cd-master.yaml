@@ -1,0 +1,14 @@
+name: CD-Master
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ManagementBackend:
+    uses: Construtora-COINF/pipelines-templates/.github/workflows/template-python.yml@main
+    with:
+      docker_image_name: "coinf-management-backend"
+      environment: "prd"
+      version: "1.0.0"
+    secrets:
+      GIT_PAT: ${{ secrets.GIT_PAT }}
