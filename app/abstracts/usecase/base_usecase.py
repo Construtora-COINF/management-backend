@@ -1,11 +1,19 @@
 from abc import ABCMeta
+from enum import Enum
 
 from fastapi import HTTPException, Request, status
 
 from app.abstracts.usecase.base_utils_usecase import BaseUtilsUseCase
-from app.abstracts.usecase.enum import ErrorsUseCaseEnum
+
 from app.config.static_files import get_templates
 from app.interfaces.usecase_interface import InterfaceUseCase
+
+
+class ErrorsUseCaseEnum(str, Enum):
+    DETAILS_NOT_FOUND = "{model} details not found."
+    NOT_FOUND = "{model} not found."
+    ALREADY_REGISTERED = "{model} already registered."
+    PARAMETERS_NOT_FOUND = "Parameters not found {model}"
 
 
 class BaseUseCaseValidDataBase(InterfaceUseCase, metaclass=ABCMeta):

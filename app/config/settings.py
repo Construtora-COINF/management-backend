@@ -44,8 +44,10 @@ class Setting(BaseSettings):
     AWS_REGION: str = config("AWS_REGION", default="sa-east-1", cast=str)
 
     # Coinf
-    EMAIL_NO_REPLY: str = config("NAME_ADMIN", default="no-reply@teste.com", cast=str)
-    EMAIL_CONTACT: str = config("NAME_ADMIN", default="contact@teste.com", cast=str)
+    EMAIL_NO_REPLY: str = config(
+        "EMAIL_NO_REPLY", default="no-reply@teste.com", cast=str
+    )
+    EMAIL_CONTACT: str = config("EMAIL_CONTACT", default="contact@teste.com", cast=str)
 
 
 @lru_cache()
