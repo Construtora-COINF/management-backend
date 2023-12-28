@@ -6,7 +6,7 @@ on:
       - release/*
       - master
 jobs:
-  Catalog:
+  ManagementBackend:
     uses: Construtora-COINF/pipelines-templates/.github/workflows/template-pr-validation-python.yml@main
 
 
