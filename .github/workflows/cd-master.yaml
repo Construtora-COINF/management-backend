@@ -2,8 +2,6 @@ name: CD-Master
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   ManagementBackend:
