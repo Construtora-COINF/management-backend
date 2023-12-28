@@ -9,3 +9,4 @@ jobs:
   Catalog:
     uses: Construtora-COINF/pipelines-templates/.github/workflows/template-pr-validation-python.yml@main
 
+
