@@ -1,0 +1,11 @@
+name: Validation
+on:
+  pull_request:
+    branches-ignore:
+      - develop,
+      - release/*
+      - master
+jobs:
+  Catalog:
+    uses: Construtora-COINF/pipelines-templates/.github/workflows/template-pr-validation-python.yml@main
+
