@@ -4,7 +4,7 @@ on:
     branches: [develop]
 jobs:
   ManagementBackend:
-    uses: Construtora-COINF/pipelines-templates/workflows/template-python.yml@main
+    uses: Construtora-COINF/pipelines-templates/.github/workflows/template-python.yml@main
     with:
       docker_image_name: "coinf-management-backend"
       environment: "dev"
