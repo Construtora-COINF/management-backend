@@ -1,16 +1,16 @@
-name: CD-Develop
+name: CD-Master
 on:
   push:
-    branches: [develop]
+    branches: [main]
   pull_request:
-    branches: [develop]
+    branches: [main]
 
 jobs:
   ManagementBackend:
     uses: Construtora-COINF/pipelines-templates/.github/workflows/template-python.yml@main
     with:
       docker_image_name: "coinf-management-backend"
-      environment: "dev"
+      environment: "prd"
       version: "1.0.0"
     secrets:
       GIT_PAT: ${{ secrets.GIT_PAT }}
